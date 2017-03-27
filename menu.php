@@ -14,7 +14,6 @@
 
     <title>Live Streaming</title>
 </head>
-
 <body>  
  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -22,13 +21,13 @@
       <a class="navbar-brand" href="#">Distance Learning</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li id="home"><a href="index.php">Home</a></li>
       <li><a href="#">Page 1</a></li>
       <li><a href="#">Page 2</a></li>
       <li><a href="#">Page 3</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li class="active"><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li id="login"><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
   </div>
 </nav>

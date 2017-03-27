@@ -19,7 +19,11 @@ if(isset($_POST['btnLogin'])) {
 }
 ?>
 <?php include "menu.php"; ?>
-<div class="container">
+
+<script>
+ document.getElementById("login").setAttribute("class", "active");
+</script>
+<div class="container" id="content">
 	<form action="login.php" method="post">
 	  <div class="form-group">
 	    <label for="usr">Username:</label>
@@ -31,17 +35,24 @@ if(isset($_POST['btnLogin'])) {
 	  </div>
 	  <button type="submit" class="btn btn-default" name="btnLogin">Login</button>
 	</form>
-<p>
+
 <?php 
 if(isset($_POST['btnLogin'])) {
 	if ( $_SESSION["logged_in"] != true ){
-		echo '<p class="bg-warning">Username or password incorrect.</p>' ;
+		echo '<p class="bg-warning">Username or password incorrect.</p> </div>' ;
 	}
 	else {
-		echo '<p class="bg-success">Succesfully logged in.</p>' ;
+		echo '	</div>
+				<script>
+					document.getElementById("content").innerHTML = \'<h3 class="text-success">Successfully logged in.</h3>\' ;
+					document.getElementById("login").innerHTML = \'<a href="login.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a>\';
+					document.getElementById("login").setAttribute("class", "");
+				</script> ';
 	}
+} else {
+	echo ' </div>' ;
 }
+
 ?>
-</p></div>
 
 <?php include "footer.php"; ?>
