@@ -1,0 +1,13 @@
+    CREATE DATABASE login;
+
+    GRANT ALL ON login.* TO 'webuser'@'localhost' IDENTIFIED BY 'webpass';
+    USE login;
+
+    CREATE TABLE user(
+    username VARCHAR(30) PRIMARY KEY,
+    password VARCHAR(30),
+    teacher BOOLEAN
+    ) Engine=InnoDB;
+
+    INSERT INTO user(username, password, teacher) VALUES('user','test', FALSE);
+    INSERT INTO user(username, password, teacher) VALUES('teacher','test', TRUE);
