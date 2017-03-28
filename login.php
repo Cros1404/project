@@ -1,4 +1,5 @@
 <?php include "connection.php"; ?>
+<?php include "menu.php"; ?>
 <?php
 if(isset($_POST['btnLogin'])) {
 
@@ -9,7 +10,6 @@ if(isset($_POST['btnLogin'])) {
 
 	foreach ($login_data as $x)	{
 		if ( $x['username'] == $username and $x['password'] == $password ) {
-			session_start();
 			$_SESSION["logged_in"] = true;
 			if ( $x['teacher'] == 1 ){
 				$_SESSION["teacher"] = true;
@@ -18,8 +18,6 @@ if(isset($_POST['btnLogin'])) {
 	}
 }
 ?>
-<?php include "menu.php"; ?>
-
 <script>
  document.getElementById("login").setAttribute("class", "active");
 </script>
@@ -35,7 +33,6 @@ if(isset($_POST['btnLogin'])) {
 	  </div>
 	  <button type="submit" class="btn btn-default" name="btnLogin">Login</button>
 	</form>
-
 <?php 
 if(isset($_POST['btnLogin'])) {
 	if ( $_SESSION["logged_in"] != true ){
@@ -45,7 +42,7 @@ if(isset($_POST['btnLogin'])) {
 		echo '	</div>
 				<script>
 					document.getElementById("content").innerHTML = \'<h3 class="text-success">Successfully logged in.</h3>\' ;
-					document.getElementById("login").innerHTML = \'<a href="login.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a>\';
+					document.getElementById("login").innerHTML = \'<a href="login.php"><span class="glyphiScon glyphicon-log-out"></span> Logout</a>\';
 					document.getElementById("login").setAttribute("class", "");
 				</script> ';
 	}

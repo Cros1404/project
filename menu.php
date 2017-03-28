@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,16 +19,21 @@
  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Distance Learning</a>
+      <a class="navbar-brand" href="restart.php">Distance Learning</a>
     </div>
-    <ul class="nav navbar-nav">
+    <ul id="menu" class="nav navbar-nav">
       <li id="home"><a href="index.php">Home</a></li>
-      <li><a href="#">Page 1</a></li>
+     <!-- <li><a href="#">Page 1</a></li>
       <li><a href="#">Page 2</a></li>
-      <li><a href="#">Page 3</a></li>
+      <li><a href="#">Page 3</a></li> -->
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li id="login"><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
   </div>
 </nav>
+<script type="text/javascript">
+  if ( "<?php echo $_SESSION["teacher"]; ?>" == "1" ){
+    document.getElementById("menu").innerHTML += '<li><a href="index.php">New Page</a></li>' ;
+  }
+</script>
