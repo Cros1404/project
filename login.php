@@ -1,8 +1,7 @@
 <?php include "connection.php"; ?>
-<?php include "menu.php"; ?>
 <?php
-if(isset($_POST['btnLogin'])) {
-
+session_start();
+if ( isset($_POST['btnLogin'] ) ) {
 	$username = $_POST['usr'] ;
 	$password = $_POST['pwd'] ;
 	$myquery = "SELECT username, password, teacher FROM user";
@@ -16,8 +15,11 @@ if(isset($_POST['btnLogin'])) {
 			} 
 		}
 	}
+} else if ( $_SESSION['logged_in'] == true ){
+	header("Location: index.php");
 }
 ?>
+<?php include "menu.php"; ?>
 <script>
  document.getElementById("login").setAttribute("class", "active");
 </script>
@@ -42,14 +44,12 @@ if(isset($_POST['btnLogin'])) {
 		echo '	</div>
 				<script>
 					document.getElementById("content").innerHTML = \'<h3 class="text-success">Successfully logged in.</h3>\' ;
-					document.getElementById("login").innerHTML = \'<a href="login.php"><span class="glyphiScon glyphicon-log-out"></span> Logout</a>\';
 					document.getElementById("login").setAttribute("class", "");
 				</script> ';
 	}
 } else {
 	echo ' </div>' ;
 }
-
 ?>
 
 <?php include "footer.php"; ?>

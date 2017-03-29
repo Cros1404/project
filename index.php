@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php include "menu.php"; ?>
 <script>
  document.getElementById("home").setAttribute("class", "active");

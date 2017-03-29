@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +18,7 @@
  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="restart.php">Distance Learning</a>
+      <a class="navbar-brand" href="index.php">Distance Learning</a>
     </div>
     <ul id="menu" class="nav navbar-nav">
       <li id="home"><a href="index.php">Home</a></li>
@@ -35,5 +34,8 @@
 <script type="text/javascript">
   if ( "<?php echo $_SESSION["teacher"]; ?>" == "1" ){
     document.getElementById("menu").innerHTML += '<li><a href="index.php">New Page</a></li>' ;
+  }
+  if ( "<?php echo $_SESSION["logged_in"]; ?>" == "1" ){
+    document.getElementById("login").innerHTML = '<a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a>';
   }
 </script>
