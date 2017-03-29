@@ -23,7 +23,7 @@ if ( isset($_POST['btnLogin'] ) ) {
 <script>
  document.getElementById("login").setAttribute("class", "active");
 </script>
-<div class="container" id="content">
+<div class="container" id="content"><div class="well well-lg">
 	<form action="login.php" method="post">
 	  <div class="form-group">
 	    <label for="usr">Username:</label>
@@ -38,17 +38,17 @@ if ( isset($_POST['btnLogin'] ) ) {
 <?php 
 if(isset($_POST['btnLogin'])) {
 	if ( $_SESSION["logged_in"] != true ){
-		echo '<p class="bg-warning">Username or password incorrect.</p> </div>' ;
+		echo '<br><p class="alert alert-warning">Incorrect username or password!</p> </div></div>' ;
 	}
 	else {
 		echo '	</div>
 				<script>
-					document.getElementById("content").innerHTML = \'<h3 class="text-success">Successfully logged in.</h3>\' ;
+					document.getElementById("content").innerHTML = \'<h4 class="alert alert-success">Successfully logged in.</h4>\' ;
 					document.getElementById("login").setAttribute("class", "");
 				</script> ';
 	}
 } else {
-	echo ' </div>' ;
+	echo ' </div></div>' ;
 }
 ?>
 

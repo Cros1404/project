@@ -1,4 +1,9 @@
 <?php 
 session_start();
+if ( $_SESSION['logged_in'] != true ){
+header("Location: index.php");
+}
 $_SESSION = array();
-header("Location: index.php");	 ?>
+include "menu.php";?>
+<h4 class="container alert alert-info">Logged out.</h4>
+<?php include "footer.php"; ?>
