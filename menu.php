@@ -12,7 +12,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <title>Live Streaming</title>
+    <title>Distance Learning</title>
 </head>
 <body>  
  <nav class="navbar navbar-inverse">

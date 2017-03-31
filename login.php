@@ -1,6 +1,9 @@
 <?php include "connection.php"; ?>
 <?php
 session_start();
+if ( $_SESSION['logged_in'] == true ){
+	header("Location: index.php");
+}
 if ( isset($_POST['btnLogin'] ) ) {
 	$given_username = filter_var( $_POST['usr'], FILTER_SANITIZE_STRING ) ;
 	$given_password = filter_var( $_POST['pwd'], FILTER_SANITIZE_STRING ) ;
@@ -15,15 +18,13 @@ if ( isset($_POST['btnLogin'] ) ) {
 			} 
 		}
 	}
-} else if ( $_SESSION['logged_in'] == true ){
-	header("Location: index.php");
 }
 ?>
 <?php include "menu.php"; ?>
 <script>
  document.getElementById("login").setAttribute("class", "active");
 </script>
-<div class="container" id="content"><div class="well well-lg">
+<div class="container" id="content" style="width:350px;"><div class="well well-lg">
 	<form action="login.php" method="post">
 	  <div class="form-group">
 	    <label for="usr">Username:</label>
@@ -43,7 +44,7 @@ if(isset($_POST['btnLogin'])) {
 	else {
 		echo '	</div>
 				<script>
-					document.getElementById("content").innerHTML = \'<h4 class="alert alert-success">Successfully logged in.</h4>\' ;
+					document.getElementById("content").innerHTML = \'<h4 class="alert alert-success">Logged in.</h4>\' ;
 					document.getElementById("login").setAttribute("class", "");
 				</script> ';
 	}
