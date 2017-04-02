@@ -15,7 +15,8 @@ if ( isset($_POST['btnLogin'] ) ) {
 			$_SESSION["logged_in"] = true;
 			if ( $x['teacher'] == 1 ){
 				$_SESSION["teacher"] = true;
-			} 
+			}
+			break; 
 		}
 	}
 }

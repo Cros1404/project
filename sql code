@@ -1,7 +1,7 @@
-    CREATE DATABASE login;
+    CREATE DATABASE distance_learning;
 
-    GRANT ALL ON login.* TO 'webuser'@'localhost' IDENTIFIED BY 'webpass';
-    USE login;
+    GRANT ALL ON distance_learning.* TO 'webuser'@'localhost' IDENTIFIED BY 'webpass';
+    USE distance_learning;
 
     CREATE TABLE user(
     username VARCHAR(30) PRIMARY KEY,
@@ -11,3 +11,10 @@
 
     INSERT INTO user(username, password, teacher) VALUES('user','test', FALSE);
     INSERT INTO user(username, password, teacher) VALUES('teacher','test', TRUE);
+
+    CREATE TABLE course(
+    courseName VARCHAR(30) PRIMARY KEY,
+    url VARCHAR(30)
+    ) Engine=InnoDB;
+
+    INSERT INTO course(courseName, url) VALUES('Math','Math');

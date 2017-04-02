@@ -11,14 +11,17 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <style type="text/css">
+      .modal-open .modal,.btn:focus{
+    outline:none!important}
+    </style>
     <title>Distance Learning</title>
 </head>
 <body>  
  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="index.php">Distance Learning</a>
+      <a class="navbar-brand" href="index.php"><strong>Distance Learning</strong></a>
     </div>
     <ul id="menu" class="nav navbar-nav">
       <li id="home"><a href="index.php">Home</a></li>
