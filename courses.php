@@ -26,13 +26,14 @@ if(isset($_POST['btnCreate']) and $_SESSION['teacher'] == true) {
 	    $add -> bindParam(':courseName', $given_coursename);
 	    $add -> bindParam(':url', $given_url);
 	    $add -> execute();
+	    mkdir( $given_url );
 	}
 }
 $myquery = "SELECT courseName, url FROM course";
 $data = $db -> query($myquery);
 foreach ($data as $x)
 {
-    echo '<a href="'.$x['url'].'.php" class="list-group-item"><h4>'.$x['courseName'].'</h4></a>';
+    echo '<a href="'.$x['url'].'/index.php" class="list-group-item"><h4>'.$x['courseName'].'</h4></a>';
 } ?>
 <!-- Trigger the modal with a button -->
 <?php if ( $_SESSION['teacher'] == true ){

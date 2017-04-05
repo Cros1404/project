@@ -21,22 +21,22 @@
  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="index.php"><strong>Distance Learning</strong></a>
+      <a class="navbar-brand" href="/project/index.php"><strong>Distance Learning</strong></a>
     </div>
     <ul id="menu" class="nav navbar-nav">
-      <li id="home"><a href="index.php">Home</a></li>
+      <li id="home"><a href="/project/index.php">Home</a></li>
 
      <!--  <li><a href="#">Page 2</a></li>
       <li><a href="#">Page 3</a></li> -->
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li id="login"><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li id="login"><a href="/project/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
   </div>
 </nav>
 <script type="text/javascript">
   if ( "<?php echo $_SESSION["logged_in"]; ?>" == "1" ){
-    document.getElementById("login").innerHTML = '<a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a>';
-    document.getElementById("menu").innerHTML += '<li id="courses"><a href="courses.php">Courses</a></li>';
+    document.getElementById("login").innerHTML = '<a href="/project/logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a>';
+    document.getElementById("menu").innerHTML += '<li id="courses"><a href="/project/courses.php">Courses</a></li>';
   }
 </script>
