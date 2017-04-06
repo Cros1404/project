@@ -11,7 +11,7 @@ header("Location: index.php");
 $coursename_exists = false;
 if(isset($_POST['btnCreate']) and $_SESSION['teacher'] == true) {
 	$given_coursename = filter_var( $_POST['course_name'], FILTER_SANITIZE_STRING ) ;
-	$myquery = "SELECT courseName, url FROM course";
+	$myquery = "SELECT courseName FROM course";
 	$data = $db -> query($myquery);
 	foreach ($data as $x)	{
 		if ( strtolower( $x['courseName'] ) == strtolower( $given_coursename ) ) {
@@ -21,19 +21,17 @@ if(isset($_POST['btnCreate']) and $_SESSION['teacher'] == true) {
 	}
    
 	if ( $coursename_exists == false ){
-		$given_url = str_replace( " ", "_", $given_coursename );
-		$add = $db -> prepare("INSERT INTO course (courseName, url) VALUES (:courseName, :url)");
+		$add = $db -> prepare("INSERT INTO course (courseName) VALUES (:courseName)");
 	    $add -> bindParam(':courseName', $given_coursename);
-	    $add -> bindParam(':url', $given_url);
 	    $add -> execute();
-	    mkdir( $given_url );
+	    mkdir( $given_coursename );
 	}
 }
-$myquery = "SELECT courseName, url FROM course";
+$myquery = "SELECT courseName FROM course";
 $data = $db -> query($myquery);
 foreach ($data as $x)
 {
-    echo '<a href="'.$x['url'].'/index.php" class="list-group-item"><h4>'.$x['courseName'].'</h4></a>';
+    echo '<a href="'.$x['courseName'].'/livestream.php" class="list-group-item"><h4>'.$x['courseName'].'</h4></a>';
 } ?>
 <!-- Trigger the modal with a button -->
 <?php if ( $_SESSION['teacher'] == true ){

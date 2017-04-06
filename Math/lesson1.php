@@ -11,4 +11,5 @@
 <hr><a href="#">Materials</a><br>
 <a href="#">Materials</a><br>
 <a href="#">Materials</a>
-</div><?php include "../footer.php" ?>
+</div>
+<?php include "../footer.php" ?>

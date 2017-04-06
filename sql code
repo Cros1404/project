@@ -1,7 +1,7 @@
-    CREATE DATABASE distance_learning;
+    CREATE DATABASE distancelearning;
 
-    GRANT ALL ON distance_learning.* TO 'webuser'@'localhost' IDENTIFIED BY 'webpass';
-    USE distance_learning;
+    GRANT ALL ON distancelearning.* TO 'webuser'@'localhost' IDENTIFIED BY 'webpass';
+    USE distancelearning;
 
     CREATE TABLE user(
     username VARCHAR(30) PRIMARY KEY,
@@ -13,8 +13,33 @@
     INSERT INTO user(username, password, teacher) VALUES('teacher','test', TRUE);
 
     CREATE TABLE course(
-    courseName VARCHAR(30) PRIMARY KEY,
-    url VARCHAR(30)
+    courseName VARCHAR(30) PRIMARY KEY
     ) Engine=InnoDB;
 
-    INSERT INTO course(courseName, url) VALUES('Math','Math');
+    INSERT INTO course(courseName) VALUES('Math');
+
+    CREATE TABLE videoURL(
+        ID int NOT NULL AUTO INCREMENT,
+        courseName VARCHAR(30),
+        lessonIndex int,
+        URL VARCHAR(2083),
+        PRIMARY KEY (ID),
+        FOREIGN KEY (courseName) REFERENCES course(courseName)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE 
+    );
+
+    CREATE TABLE lesson(
+        ID int NOT NULL AUTO_INCREMENT,
+        courseName VARCHAR(30),
+        lessonIndex int,
+        videoURL VARCHAR(2083),
+        PRIMARY KEY (ID),
+        FOREIGN KEY (courseName) REFERENCES course(courseName)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE 
+    ) Engine=InnoDB;
+
+    INSERT INTO lesson(courseName, lessonIndex, videoURL) VALUES('Math', 1, 'https://www.youtube.com/embed/vN2jAio0djg');
+    INSERT INTO lesson(courseName, lessonIndex, videoURL) VALUES('Math', 2, 'https://www.youtube.com/embed/vN2jAio0djg');
+    INSERT INTO lesson(courseName, lessonIndex, videoURL) VALUES('Math', 3, 'https://www.youtube.com/embed/vN2jAio0djg');
