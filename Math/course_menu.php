@@ -11,12 +11,12 @@ include "../menu.php"; ?>
   <hr>
   <ul class="nav nav-pills nav-stacked" role="tablist">
   <?php 
-    $myquery = "SELECT lessonIndex, videoURL FROM lesson WHERE courseName='".basename(__DIR__)."';";
+    $myquery = "SELECT lessonIndex, videoURL, lessonName FROM lesson WHERE courseName='".basename(__DIR__)."';";
     $data = $db -> query($myquery);
     foreach ($data as $x)
     {
       if ($x['lessonIndex'] != 0)
-        echo '<li id="lesson'.$x['lessonIndex'].'"><a href="lesson'.$x['lessonIndex'].'.php">Lesson '.$x['lessonIndex'].'</a></li>';
+        echo '<li id="lesson'.$x['lessonIndex'].'"><a href="'.$x['lessonIndex'].'.php">'.$x['lessonName'].'</a></li>';
     } 
   ?>
  <!--   <li id="lesson1"><a href="lesson1.php">Lesson 1</a></li>
