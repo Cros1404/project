@@ -19,28 +19,64 @@
     INSERT INTO course(courseName) VALUES('Math');
 
     CREATE TABLE lesson(
-        ID int NOT NULL AUTO_INCREMENT,
+        lessonID int NOT NULL AUTO_INCREMENT,
         courseName VARCHAR(30),
-        lessonIndex int,
         lessonName VARCHAR(30),
         videoURL VARCHAR(2083),
+        PRIMARY KEY (lessonID),
+        FOREIGN KEY (courseName) REFERENCES course(courseName)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE 
+    ) Engine=InnoDB;
+
+    INSERT INTO lesson(courseName, lessonName, videoURL) VALUES('Math', 'Lesson 1', 'https://www.youtube.com/embed/vN2jAio0djg');
+    INSERT INTO lesson(courseName, lessonName, videoURL) VALUES('Math', 'Lesson 2', 'https://www.youtube.com/embed/vN2jAio0djg');
+    INSERT INTO lesson(courseName, lessonName, videoURL) VALUES('Math', 'Hello', 'https://www.youtube.com/embed/vN2jAio0djg');
+
+
+    CREATE TABLE exercise(
+        ID int NOT NULL AUTO_INCREMENT,
+        courseName VARCHAR(30),
+        lessonID int,
+        URL VARCHAR(2083),
+        PRIMARY KEY (ID),
+        FOREIGN KEY (lessonID) REFERENCES lesson(lessonID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
+    ) Engine=InnoDB;
+
+    INSERT INTO exercise(courseName, lessonID, URL) VALUES('Math', 1, 'http://yle.fi/');
+    INSERT INTO exercise(courseName, lessonID, URL) VALUES('Math', 1, 'http://yle.fi/');
+
+    CREATE TABLE material(
+        ID int NOT NULL AUTO_INCREMENT,
+        lessonID int,
+        materialName VARCHAR(30),
+        URL VARCHAR(2083),
+        PRIMARY KEY (ID),
+        FOREIGN KEY (lessonID) REFERENCES lesson(lessonID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
+    ) Engine=InnoDB;
+
+    INSERT INTO material(materialName, lessonID, URL) VALUES('Physics Book Edition 3', 1, 'http://yle.fi/');
+    INSERT INTO material(materialName, lessonID, URL) VALUES('Math on wikipedia', 1, 'http://yle.fi/');
+
+    CREATE TABLE extraMaterial(
+        ID int NOT NULL AUTO_INCREMENT,
+        courseName VARCHAR(30),
+        materialName VARCHAR(30),
+        URL VARCHAR(2083),
         PRIMARY KEY (ID),
         FOREIGN KEY (courseName) REFERENCES course(courseName)
             ON DELETE CASCADE
             ON UPDATE CASCADE 
     ) Engine=InnoDB;
 
-    INSERT INTO lesson(courseName, lessonIndex, lessonName, videoURL) VALUES('Math', 1, 'Lesson 1', 'https://www.youtube.com/embed/vN2jAio0djg');
-    INSERT INTO lesson(courseName, lessonIndex, lessonName, videoURL) VALUES('Math', 2, 'Lesson 2', 'https://www.youtube.com/embed/vN2jAio0djg');
-    INSERT INTO lesson(courseName, lessonIndex, lessonName, videoURL) VALUES('Math', 3, 'Hello', 'https://www.youtube.com/embed/vN2jAio0djg');
-
-
-    CREATE TABLE lesson(
+    CREATE TABLE livestream(
         ID int NOT NULL AUTO_INCREMENT,
         courseName VARCHAR(30),
-        lessonIndex int,
-        lessonName VARCHAR(30),
-        videoURL VARCHAR(2083),
+        URL VARCHAR(2083),
         PRIMARY KEY (ID),
         FOREIGN KEY (courseName) REFERENCES course(courseName)
             ON DELETE CASCADE

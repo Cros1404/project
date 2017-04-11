@@ -7,16 +7,15 @@ if ( $_SESSION['logged_in'] == true ){
 if ( isset($_POST['btnLogin'] ) ) {
 	$given_username = filter_var( $_POST['usr'], FILTER_SANITIZE_STRING ) ;
 	$given_password = filter_var( $_POST['pwd'], FILTER_SANITIZE_STRING ) ;
-	$myquery = "SELECT username, password, teacher FROM user";
-	$login_data = $db -> query($myquery);
-
-	foreach ($login_data as $x)	{
-		if ( $x['username'] == $given_username and $x['password'] == $given_password ) {
-			$_SESSION["logged_in"] = true;
-			if ( $x['teacher'] == 1 ){
-				$_SESSION["teacher"] = true;
-			}
-			break; 
+	$search = $db -> prepare("SELECT username, password, teacher FROM user WHERE username=:username AND password=:password");
+	$search -> bindParam(':username', $given_username);
+	$search -> bindParam(':password', $given_password);
+	$search -> execute();
+	$entry = $search -> fetch();
+	if ( $entry ) {
+		$_SESSION["logged_in"] = true;
+		if ( $entry['teacher'] == 1 ) {
+			$_SESSION["teacher"] = true;
 		}
 	}
 }

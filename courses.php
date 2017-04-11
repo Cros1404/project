@@ -9,16 +9,13 @@ header("Location: index.php");
 
 <?php
 $coursename_exists = false;
-if(isset($_POST['btnCreate']) and $_SESSION['teacher'] == true) {
+if(isset($_POST['btnCreate']) and $_SESSION['teacher']) {
 	$given_coursename = filter_var( $_POST['course_name'], FILTER_SANITIZE_STRING ) ;
-	$myquery = "SELECT courseName FROM course";
-	$data = $db -> query($myquery);
-	foreach ($data as $x)	{
-		if ( strtolower( $x['courseName'] ) == strtolower( $given_coursename ) ) {
-			$coursename_exists = true;
-			break;
-		}
-	}
+	$search = $db -> prepare("SELECT courseName FROM course WHERE courseName=:courseName");
+	$search -> bindParam(':courseName', $given_coursename);
+	$search -> execute();
+	if ( $search -> fetch() )
+		$coursename_exists = true ;
    
 	if ( $coursename_exists == false ){
 		$add = $db -> prepare("INSERT INTO course (courseName) VALUES (:courseName)");
@@ -27,11 +24,12 @@ if(isset($_POST['btnCreate']) and $_SESSION['teacher'] == true) {
 	    mkdir( $given_coursename );
 	}
 }
+
 $myquery = "SELECT courseName FROM course";
 $data = $db -> query($myquery);
 foreach ($data as $x)
 {
-    echo '<a href="'.$x['courseName'].'/livestream.php" class="list-group-item"><h4>'.$x['courseName'].'</h4></a>';
+    echo '<a href="lesson.php?courseName='.$x['courseName'].'&id=livestream" class="list-group-item"><h4>'.$x['courseName'].'</h4></a>';
 } ?>
 <!-- Trigger the modal with a button -->
 <?php if ( $_SESSION['teacher'] == true ){
@@ -41,14 +39,6 @@ echo '<button type="button" class="btn btn-default list-group-item" data-toggle=
   <a href="#" class="list-group-item"><h4>Physics</h4></a>
   <a href="#" class="list-group-item"><h4>English</h4></a> -->
 </div>
-<?php
-/*$myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
-$txt = "Mickey Mouse\n";
-fwrite($myfile, $txt);
-$txt = "Minnie Mouse\n";
-fwrite($myfile, $txt);
-fclose($myfile);*/
-?>
 
 
 <!-- Modal -->
@@ -80,11 +70,6 @@ fclose($myfile);*/
 
 <script>
  document.getElementById("courses").setAttribute("class", "active");
-</script>
-<script>
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
-});
 </script>
 
 <?php 

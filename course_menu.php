@@ -2,7 +2,7 @@
 session_start();
 
 if ( $_SESSION['logged_in'] != true )
-  header("Location: ../index.php");
+  header("Location: index.php");
 
 if ( isset($_POST['btnEditMode'] ) )
   $_SESSION['EditMode'] = true;
@@ -10,8 +10,8 @@ if ( isset($_POST['btnEditMode'] ) )
 if ( isset($_POST['btnExitEditMode'] ) )
   $_SESSION['EditMode'] = false;
 
-include "../connection.php";
-include "../menu.php"; ?>
+include "connection.php";
+include "menu.php"; ?>
 <div class="container"><div class="row"><div class="col-12 col-md-auto">
 <div class="container" style="width:auto;float:left;"><div class="well">
   <h4 style="line-height: 130%;"><strong>
@@ -26,8 +26,7 @@ include "../menu.php"; ?>
     $stmt -> execute();
     foreach ($stmt as $x)
     {
-      if ($x['lessonIndex'] != 0)
-        echo '<li id="lesson'.$x['lessonIndex'].'"><a href="lesson.php?courseName='.$x['courseName'].'&id='.$x['lessonID'].'.php">'.$x['lessonName'].'</a></li>';
+      echo '<li id="lesson'.$x['lessonID'].'"><a href="lesson.php?courseName='.$_GET['courseName'].'&id='.$x['lessonID'].'">'.$x['lessonName'].'</a></li>';
     } 
   ?>
    <!-- <li id="lesson1"><a href="lesson1.php"></a></li>
@@ -35,8 +34,8 @@ include "../menu.php"; ?>
     <li><a href="#">Lesson 3</a></li>
     <li><a href="#">Lesson 4</a></li> -->
     <li><hr></li>
-    <li id="livestream"><a href="livestream.php">Live Stream</a></li>
-    <li id="materials"><a href="materials.php">Study Materials</a></li>
+    <li id="livestream"><a href="lesson.php?courseName=<?php echo $_GET['courseName'];?>&id=livestream">Live Stream</a></li>
+    <li id="materials"><a href="lesson.php?courseName=<?php echo $_GET['courseName'];?>&id=materials">Study Materials</a></li>
   </ul>
 </div></div></div>
 

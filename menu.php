@@ -12,8 +12,9 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css">
-      .modal-open .modal,.btn:focus{
-    outline:none!important}
+    .modal-open .modal,.btn:focus{
+      outline:none!important
+    }
     </style>
     <title>Distance Learning</title>
 </head>
@@ -21,7 +22,7 @@
  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/project/index.php"><strong>Distance Learning</strong></a>
+      <a class="navbar-brand" href="/project/index.php" style="font-variant: small-caps;"><strong>Distance Learning</strong></a>
     </div>
     <ul id="menu" class="nav navbar-nav">
       <li id="home"><a href="/project/index.php">Home</a></li>

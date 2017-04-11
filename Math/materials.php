@@ -1,6 +1,6 @@
 <?php include "course_menu.php"; ?>
 <script type="text/javascript">
-	document.getElementById("livestream").setAttribute("class", "active");
+	document.getElementById("materials").setAttribute("class", "active");
 </script>
 <?php
 if ($_SESSION['teacher'])
