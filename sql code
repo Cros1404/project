@@ -19,11 +19,11 @@
     INSERT INTO course(courseName) VALUES('Math');
 
     CREATE TABLE lesson(
-        lessonID int NOT NULL AUTO_INCREMENT,
+        ID int NOT NULL AUTO_INCREMENT,
         courseName VARCHAR(30),
         lessonName VARCHAR(30),
         videoURL VARCHAR(2083),
-        PRIMARY KEY (lessonID),
+        PRIMARY KEY (ID),
         FOREIGN KEY (courseName) REFERENCES course(courseName)
             ON DELETE CASCADE
             ON UPDATE CASCADE 
@@ -40,7 +40,7 @@
         lessonID int,
         URL VARCHAR(2083),
         PRIMARY KEY (ID),
-        FOREIGN KEY (lessonID) REFERENCES lesson(lessonID)
+        FOREIGN KEY (lessonID) REFERENCES lesson(ID)
             ON DELETE CASCADE
             ON UPDATE CASCADE
     ) Engine=InnoDB;
@@ -54,7 +54,7 @@
         materialName VARCHAR(30),
         URL VARCHAR(2083),
         PRIMARY KEY (ID),
-        FOREIGN KEY (lessonID) REFERENCES lesson(lessonID)
+        FOREIGN KEY (lessonID) REFERENCES lesson(ID)
             ON DELETE CASCADE
             ON UPDATE CASCADE
     ) Engine=InnoDB;

@@ -21,12 +21,12 @@ include "menu.php"; ?>
   <hr>
   <ul class="nav nav-pills nav-stacked" role="tablist">
   <?php 
-    $stmt = $db -> prepare("SELECT lessonID, videoURL, lessonName FROM lesson WHERE courseName=:courseName");
+    $stmt = $db -> prepare("SELECT ID, videoURL, lessonName FROM lesson WHERE courseName=:courseName");
     $stmt -> bindParam( ':courseName', $_GET['courseName'] );
     $stmt -> execute();
     foreach ($stmt as $x)
     {
-      echo '<li id="lesson'.$x['lessonID'].'"><a href="lesson.php?courseName='.$_GET['courseName'].'&id='.$x['lessonID'].'">'.$x['lessonName'].'</a></li>';
+      echo '<li id="lesson'.$x['ID'].'"><a href="lesson.php?courseName='.$_GET['courseName'].'&id='.$x['ID'].'">'.$x['lessonName'].'</a></li>';
     } 
   ?>
    <!-- <li id="lesson1"><a href="lesson1.php"></a></li>

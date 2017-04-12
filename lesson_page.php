@@ -1,13 +1,12 @@
 <?php 
 // find video link
-$stmt = $db -> prepare("SELECT videoURL FROM lesson WHERE courseName=:courseName AND lessonID=:id");
-$stmt -> bindParam(':courseName', $_GET['courseName']);
+$stmt = $db -> prepare("SELECT videoURL FROM lesson WHERE ID=:id");
 $stmt -> bindParam(':id', $_GET['id']);
 $stmt -> execute();
 $x = $stmt -> fetch();
 echo '<iframe width="560" height="315" src="'.$x['videoURL'].'" frameborder="0" allowfullscreen></iframe>';
 if ($_SESSION['EditMode']) {
-	echo '<br><button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> Edit Video URL</button> ' ;
+	echo '<br><button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> Edit Lesson</button> ' ;
 	echo '<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-remove"></span> Remove Lesson</button><br> ' ;
 }
 
