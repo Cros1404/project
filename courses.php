@@ -21,7 +21,6 @@ if(isset($_POST['btnCreate']) and $_SESSION['teacher']) {
 		$add = $db -> prepare("INSERT INTO course (courseName) VALUES (:courseName)");
 	    $add -> bindParam(':courseName', $given_coursename);
 	    $add -> execute();
-	    mkdir( $given_coursename );
 	}
 }
 

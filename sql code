@@ -29,14 +29,13 @@
             ON UPDATE CASCADE 
     ) Engine=InnoDB;
 
-    INSERT INTO lesson(courseName, lessonName, videoURL) VALUES('Math', 'Lesson 1', 'https://www.youtube.com/embed/vN2jAio0djg');
-    INSERT INTO lesson(courseName, lessonName, videoURL) VALUES('Math', 'Lesson 2', 'https://www.youtube.com/embed/vN2jAio0djg');
-    INSERT INTO lesson(courseName, lessonName, videoURL) VALUES('Math', 'Hello', 'https://www.youtube.com/embed/vN2jAio0djg');
+    INSERT INTO lesson(courseName, lessonName, videoURL) VALUES('Math', 'Lesson 1', 'https://www.youtube.com/watch?v=7fnnZm_pQv8');
+    INSERT INTO lesson(courseName, lessonName, videoURL) VALUES('Math', 'Lesson 2', 'https://www.youtube.com/watch?v=7fnnZm_pQv8');
+    INSERT INTO lesson(courseName, lessonName, videoURL) VALUES('Math', 'Hello', 'https://www.youtube.com/watch?v=7fnnZm_pQv8');
 
 
     CREATE TABLE exercise(
         ID int NOT NULL AUTO_INCREMENT,
-        courseName VARCHAR(30),
         lessonID int,
         URL VARCHAR(2083),
         PRIMARY KEY (ID),
@@ -45,13 +44,13 @@
             ON UPDATE CASCADE
     ) Engine=InnoDB;
 
-    INSERT INTO exercise(courseName, lessonID, URL) VALUES('Math', 1, 'http://yle.fi/');
-    INSERT INTO exercise(courseName, lessonID, URL) VALUES('Math', 1, 'http://yle.fi/');
+    INSERT INTO exercise(lessonID, URL) VALUES(1, 'http://yle.fi/');
+    INSERT INTO exercise(lessonID, URL) VALUES(1, 'http://yle.fi/');
 
     CREATE TABLE material(
         ID int NOT NULL AUTO_INCREMENT,
         lessonID int,
-        materialName VARCHAR(30),
+        materialName VARCHAR(90),
         URL VARCHAR(2083),
         PRIMARY KEY (ID),
         FOREIGN KEY (lessonID) REFERENCES lesson(ID)
@@ -65,13 +64,17 @@
     CREATE TABLE extraMaterial(
         ID int NOT NULL AUTO_INCREMENT,
         courseName VARCHAR(30),
-        materialName VARCHAR(30),
+        materialName VARCHAR(90),
         URL VARCHAR(2083),
         PRIMARY KEY (ID),
         FOREIGN KEY (courseName) REFERENCES course(courseName)
             ON DELETE CASCADE
             ON UPDATE CASCADE 
     ) Engine=InnoDB;
+
+    INSERT INTO extraMaterial(courseName, URL, materialName) VALUES( 'Math', 'https://en.wikipedia.org/wiki/Regular_expression', 'Regular Expression on wikipedia');
+
+    INSERT INTO extraMaterial(courseName, URL, materialName) VALUES( 'Math', 'https://en.wikipedia.org/wiki/Regular_expression', 'Math on wikipedia');
 
     CREATE TABLE livestream(
         ID int NOT NULL AUTO_INCREMENT,
@@ -82,3 +85,5 @@
             ON DELETE CASCADE
             ON UPDATE CASCADE 
     ) Engine=InnoDB;
+
+    INSERT INTO livestream(courseName, URL) VALUES( 'Math', 'UCzQUP1qoWDoEbmsQxvdjxgQ');
