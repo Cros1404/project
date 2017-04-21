@@ -46,7 +46,7 @@ foreach ($data as $x)
         <div class=\"container\">
         <form action=\"moveTest$ID.php\" method=\"post\">
         <input type=\"hidden\" name=\"ID\"  value=\"$ID\" id=\"ID\">
-        <h2>Lesson: $name_lesson</h2>
+        <h2>Create Test For Lesson: $name_lesson</h2>
     <div class=\"form-group\">
       <label for=\"qust\">Question:</label>
       <input type=\"text\" name=\"qust\" class=\"form-control\" id=\"qust\" >
@@ -135,7 +135,7 @@ foreach ($data as $x)
         } ?>
         <?php include "menu.php" ?>
         <div class="container">
-        <h3>CREATE TEST FOR LESSON: '.$name_lesson.' </h3>
+        <h3>TEST: '.$name_lesson.' </h3>
         <form class="container" action="Test'.$ID.'.php" method="post" >
         <?php include "connection.php";
         $nRow="SELECT COUNT(*) FROM exam where ID ='.$ID.'";

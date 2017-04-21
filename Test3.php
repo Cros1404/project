@@ -6,7 +6,7 @@
         } ?>
         <?php include "menu.php" ?>
         <div class="container">
-        <h3>CREATE TEST FOR LESSON: Hello </h3>
+        <h3>TEST: Hello </h3>
         <form class="container" action="Test3.php" method="post" >
         <?php include "connection.php";
         $nRow="SELECT COUNT(*) FROM exam where ID =3";
