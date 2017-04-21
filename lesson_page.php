@@ -1,9 +1,10 @@
 <?php
 // find video link
-$stmt = $db -> prepare("SELECT ID, videoURL, lessonName FROM lesson WHERE ID=:id");
+$stmt = $db -> prepare("SELECT ID, videoURL, lessonName, testPublished FROM lesson WHERE ID=:id");
 $stmt -> bindParam(':id', $_GET['id']);
 $stmt -> execute();
 $x = $stmt -> fetch();
+$testPublished = $x['testPublished'];
 parse_str( parse_url( $x['videoURL'], PHP_URL_QUERY ), $my_array_of_vars ); // Get video ID from URL
 echo '<iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/'.$my_array_of_vars['v'].'" frameborder="0" allowfullscreen></iframe>';
 if ($_SESSION['EditMode']) {
@@ -57,11 +58,7 @@ if ( $empty )
 if ($_SESSION['EditMode'])
 	echo '<br><button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" onclick="btnPress( \'Add New\', \'Material\')"><span class="glyphicon glyphicon-plus"></span> Add New Material</button>' ;
 
-$stmt = $db -> prepare("SELECT id_question FROM exam WHERE ID=:id");
-$stmt -> bindParam(':id', $_GET['id']);
-$stmt -> execute();
-$x = $stmt -> fetch();
-if ( $x )
+if ( $testPublished == true )
   echo '<hr><a href="Test'.$_GET['id'].'.php"> Test</a>' ;
 else
   echo '<hr><i style="color:grey">No test available.</i>';

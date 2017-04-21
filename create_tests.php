@@ -1,5 +1,4 @@
 <?php include "connection.php" ?>
-
 <?php session_start();
 if ( $_SESSION['logged_in'] != true ){
 header("Location: index.php");
@@ -7,7 +6,9 @@ header("Location: index.php");
 
 
 <?php include "menu.php" ?>
-
+<script>
+ document.getElementById("createtest").setAttribute("class", "active");
+</script>
 <h2 style="margin-left: 65px">CREATE TESTS</h2>
 <p style="margin-left: 65px">Choose a couser and then choose a lesson to create a test</p>
 <div class="container list_group" style="width:500px;margin-left: 50px">
@@ -20,22 +21,25 @@ foreach ($data as $x)
 {
     echo '<a class="list-group-item" data-toggle="collapse" data-target="#demo"><h4>'.$x['courseName'].'</h4></a>';
     $course_name= $x['courseName'];
-    $getLesson = "SELECT lessonName,ID,courseName FROM lesson where courseName = '$course_name' ";
+    $getLesson = "SELECT lessonName,ID,courseName, testPublished FROM lesson where courseName = '$course_name' ";
     $LessonInfo = $db -> query($getLesson);
     echo '<div id="demo" class="collapse">';
     foreach ($LessonInfo as $courseInfo)
     {
         $name_lesson = $courseInfo['lessonName'];
         $ID = $courseInfo['ID'];
+        $testPublished = $courseInfo['testPublished'];
+
       //  $_SESSION[$name_lesson]=$name_lesson;
-      $myfile = fopen("MakeTest$name_lesson.php", "w");
-        echo '<a href="MakeTest'.$name_lesson.'.php" type="button" class="btn btn-default list-group-item"><h4>'.$courseInfo['lessonName'].'</h4></a>' ;
+      $myfile = fopen("MakeTest$ID.php", "w");
+        echo '<a href="MakeTest'.$ID.'.php" type="button" class="btn btn-default list-group-item"><h4>'.$courseInfo['lessonName'].'</h4></a>' ;
         //echo '<a onclick="'.$name_lesson.'()" type="button" class="btn btn-default list-group-item"><h4>'.$courseInfo['lessonName'].'</h4></a>' ;
         //echo '<a class="list-group-item "><h5>'.$courseInfo['lessonName'].'</h5></a>';
         $test="
 
+        <?php include \"connection.php\" ?>
         <?php include \"menu.php\" ?>
-        <?php include \"control.php\"?>
+        <?php include \"control.php\" ?>
         <div class=\"container\">
         <form action=\"moveTest$ID.php\" method=\"post\">
         <input type=\"hidden\" name=\"ID\"  value=\"$ID\" id=\"ID\">
@@ -54,23 +58,35 @@ foreach ($data as $x)
       <label for=\"D\">D.</label>
       <input type=\"text\" name=\"D\" class=\"form-control\" id=\"D\"><br>
       <label for=\"ra\">Right Option:</label>
-      <input type=\"text\" name=\"ra\" class=\"form-control\" id=\"ra\"><br>
+      <input type=\"text\" name=\"ra\" class=\"form-control\" id=\"ra\" pattern=\"[A-Da-d]{1}\" title=\"type option A/B/C/D\"><br>
       <button type=\"submit\" class=\"btn btn-default\" name=\"btnTest\">Create</button>
     </div>
   </form>
   <button type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">Look Through The Test</button>
+  <br><br><br><br>
   <!-- Modal -->
   <div id=\"myModal\" class=\"modal fade\" role=\"dialog\" >
     <div class=\"modal-dialog\" style=\"width:1000px\">
       <!-- Modal content-->
       <div class=\"modal-content\" style=\"width:1000px\">
-        <?php include \"Test$ID.php\"?>
+        <?php include \"Test$ID.php\" ?>
         <div class=\"modal-body\">
           <p>The Test will be published when publish button is pressed.</p>
         </div>
         <div class=\"modal-footer\">
 
-          <a href=\"EditTest$ID.php\"><button type=\"button\"  class=\"btn btn-info btn-primary btn-lg\">Edit The Test</button></a>
+        <form action=\"buttons.php?id=$ID\" method=\"post\">
+        <a href=\"EditTest$ID.php\"><button type=\"button\"  class=\"btn btn-info btn-primary btn-lg\">Edit The Test</button></a>
+        <?php
+        \$stmt = \$db->prepare(\"SELECT testPublished FROM lesson where ID = $ID\");
+        \$stmt -> execute();
+        \$x = \$stmt -> fetch();
+        if ( \$x['testPublished'] != 1 )
+                echo '<button type=\"submit\" class=\"btn btn-info btn-primary btn-lg\" name=\"btnPublish\">Publish</button>';
+        else
+                echo '<button type=\"submit\" class=\"btn btn-info btn-primary btn-lg\" name=\"btnUnpublish\">Unpublish</button>';
+        ?>
+          </form>
         </div>
       </div>
     </div>
@@ -101,7 +117,7 @@ foreach ($data as $x)
           $ra=$_POST["ra"];
           $ID=$_POST["ID"];
           $add->execute();
-          header("Location: MakeTest'.$name_lesson.'.php");
+          header("Location: MakeTest'.$ID.'.php");
          ?>
         ';
 
@@ -136,26 +152,26 @@ echo "<input type=\'radio\' name=\'$i\' value=\'B\'>  B.  ".$row["B"]."<br>";
 echo "<input type=\'radio\' name=\'$i\' value=\'C\'>  C.  ".$row["C"]."<br>";
 echo "<input type=\'radio\' name=\'$i\' value=\'D\'>  D.  ".$row["D"]."<br>";
 echo  "<p id=\'$i\' ></p>";
-echo  "<input type=\'hidden\' name=\'answer$i\' value=\'$the_answer\'><br>";
+echo  "<input type=\'hidden\' name=\'answer$i\' value=\'$the_answer\'>";
 echo "</div></div></div>";
 $i++;
         }
 ?>
-        <div class=\'container\' style="margin-left: 500px;">
-        <input type=\'submit\' class="btn" name=\'btnSmTest'.$ID.'\' value=\'Submit\' >
-        </div>
+        <input type=\'submit\' class="btn" name=\'btnSmTest'.$ID.'\' value=\'Submit\' style="margin-left: 500px;" >
         </form>
         </div>
         <?php
         if(isset($_POST[\'btnSmTest'.$ID.'\']))
         {
+          $right_answer_numbers = 0;
+          $right_answer_point = 0;
           for($i=1;$i<=$number_of_row;$i++)
           {
             if($_POST["$i"]== $_POST["answer$i"]){
               echo
               "
               <script>
-              document.getElementById(\"$i\").innerHTML=\"<b >Your choosen is: ".$_POST[$i].". Congratulation!!!</b>\";
+              document.getElementById(\"$i\").innerHTML=\"<b >Your choosen is: ".$_POST[$i]." <br>Congratulations!!!</b>\";
               </script>
               ";
               $right_answer_numbers +=1;
@@ -163,12 +179,16 @@ $i++;
             }
             else
             {
-                echo "<script>document.getElementById(\"$i\").innerHTML=\"<b>Your choosen is:".$_POST[$i].". Try Again!!!</b>\";</script>";
+                $answer = "Your answer: $_POST[$i] <br> Try Again!!!";
+                if ( $_POST[$i] == null )
+                  $answer = "You did not choose an answer.";
+                echo "<script>document.getElementById(\"$i\").innerHTML=\"<b>".$answer."</b>\";</script>";
             }
           }
-        echo "<br> You have $right_answer_numbers right questions. <br> You have $right_answer_point points";
+        echo "<p style=\"margin-left: 500px;\"><br> You have $right_answer_numbers right questions. <br> You have $right_answer_point points</p>";
         }
         ?>
+        <br><br>
         <?php include "footer.php" ?>
         ';
         fwrite($textTest,$txTest);

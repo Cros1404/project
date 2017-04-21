@@ -23,6 +23,7 @@
         courseName VARCHAR(30),
         lessonName VARCHAR(30),
         videoURL VARCHAR(2083),
+        testPublished BOOLEAN,
         PRIMARY KEY (ID),
         FOREIGN KEY (courseName) REFERENCES course(courseName)
             ON DELETE CASCADE

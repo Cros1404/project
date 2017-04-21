@@ -17,6 +17,6 @@
           $ra=$_POST["ra"];
           $ID=$_POST["ID"];
           $add->execute();
-          header("Location: MakeTestHello.php");
+          header("Location: MakeTest3.php");
          ?>
         

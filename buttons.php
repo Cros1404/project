@@ -160,5 +160,15 @@ else {
 		$stmt -> bindParam(':courseName', $_GET['courseName']);
 		$stmt -> execute();
 		header("Location: courses.php");
-	}
+	} else if ( isset( $_POST['btnPublish'] ) ){
+    $stmt = $db -> prepare("UPDATE lesson SET testPublished=true WHERE ID=:id");
+		$stmt -> bindParam(':id', $_GET['id']);
+		$stmt -> execute();
+    header("Location: MakeTest".$_GET['id'].".php");
+  } else if ( isset( $_POST['btnUnpublish'] ) ){
+    $stmt = $db -> prepare("UPDATE lesson SET testPublished=false WHERE ID=:id");
+		$stmt -> bindParam(':id', $_GET['id']);
+		$stmt -> execute();
+    header("Location: MakeTest".$_GET['id'].".php");
+  }
 }

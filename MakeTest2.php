@@ -1,7 +1,8 @@
 
 
+        <?php include "connection.php" ?>
         <?php include "menu.php" ?>
-        <?php include "control.php"?>
+        <?php include "control.php" ?>
         <div class="container">
         <form action="moveTest2.php" method="post">
         <input type="hidden" name="ID"  value="2" id="ID">
@@ -20,23 +21,35 @@
       <label for="D">D.</label>
       <input type="text" name="D" class="form-control" id="D"><br>
       <label for="ra">Right Option:</label>
-      <input type="text" name="ra" class="form-control" id="ra"><br>
+      <input type="text" name="ra" class="form-control" id="ra" pattern="[A-Da-d]{1}" title="type option A/B/C/D"><br>
       <button type="submit" class="btn btn-default" name="btnTest">Create</button>
     </div>
   </form>
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Look Through The Test</button>
+  <br><br><br><br>
   <!-- Modal -->
   <div id="myModal" class="modal fade" role="dialog" >
     <div class="modal-dialog" style="width:1000px">
       <!-- Modal content-->
       <div class="modal-content" style="width:1000px">
-        <?php include "Test2.php"?>
+        <?php include "Test2.php" ?>
         <div class="modal-body">
           <p>The Test will be published when publish button is pressed.</p>
         </div>
         <div class="modal-footer">
 
-          <a href="EditTest2.php"><button type="button"  class="btn btn-info btn-primary btn-lg">Edit The Test</button></a>
+        <form action="buttons.php?id=2" method="post">
+        <a href="EditTest2.php"><button type="button"  class="btn btn-info btn-primary btn-lg">Edit The Test</button></a>
+        <?php
+        $stmt = $db->prepare("SELECT testPublished FROM lesson where ID = 2");
+        $stmt -> execute();
+        $x = $stmt -> fetch();
+        if ( $x['testPublished'] != 1 )
+                echo '<button type="submit" class="btn btn-info btn-primary btn-lg" name="btnPublish">Publish</button>';
+        else
+                echo '<button type="submit" class="btn btn-info btn-primary btn-lg" name="btnUnpublish">Unpublish</button>';
+        ?>
+          </form>
         </div>
       </div>
     </div>

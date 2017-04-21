@@ -26,26 +26,26 @@ echo "<input type='radio' name='$i' value='B'>  B.  ".$row["B"]."<br>";
 echo "<input type='radio' name='$i' value='C'>  C.  ".$row["C"]."<br>";
 echo "<input type='radio' name='$i' value='D'>  D.  ".$row["D"]."<br>";
 echo  "<p id='$i' ></p>";
-echo  "<input type='hidden' name='answer$i' value='$the_answer'><br>";
+echo  "<input type='hidden' name='answer$i' value='$the_answer'>";
 echo "</div></div></div>";
 $i++;
         }
 ?>
-        <div class='container' style="margin-left: 500px;">
-        <input type='submit' class="btn" name='btnSmTest1' value='Submit' >
-        </div>
+        <input type='submit' class="btn" name='btnSmTest1' value='Submit' style="margin-left: 500px;" >
         </form>
         </div>
         <?php
         if(isset($_POST['btnSmTest1']))
         {
+          $right_answer_numbers = 0;
+          $right_answer_point = 0;
           for($i=1;$i<=$number_of_row;$i++)
           {
             if($_POST["$i"]== $_POST["answer$i"]){
               echo
               "
               <script>
-              document.getElementById(\"$i\").innerHTML=\"<b >Your choosen is: ".$_POST[$i].". Congratulation!!!</b>\";
+              document.getElementById(\"$i\").innerHTML=\"<b >Your choosen is: ".$_POST[$i]." <br>Congratulations!!!</b>\";
               </script>
               ";
               $right_answer_numbers +=1;
@@ -53,11 +53,15 @@ $i++;
             }
             else
             {
-                echo "<script>document.getElementById(\"$i\").innerHTML=\"<b>Your choosen is:".$_POST[$i].". Try Again!!!</b>\";</script>";
+                $answer = "Your answer: $_POST[$i] <br> Try Again!!!";
+                if ( $_POST[$i] == null )
+                  $answer = "You did not choose an answer.";
+                echo "<script>document.getElementById(\"$i\").innerHTML=\"<b>".$answer."</b>\";</script>";
             }
           }
-        echo "<br> You have $right_answer_numbers right questions. <br> You have $right_answer_point points";
+        echo "<p style=\"margin-left: 500px;\"><br> You have $right_answer_numbers right questions. <br> You have $right_answer_point points</p>";
         }
         ?>
+        <br><br>
         <?php include "footer.php" ?>
         
