@@ -59,7 +59,7 @@ $i++;
                 echo "<script>document.getElementById(\"$i\").innerHTML=\"<b>".$answer."</b>\";</script>";
             }
           }
-        echo "<p style=\"margin-left: 500px;\"><br> You have $right_answer_numbers right questions. <br> You have $right_answer_point points</p>";
+        echo "<h4 style=\"margin-left: 360px; \"><b><br> You have $right_answer_numbers right questions. <br> You have $right_answer_point points</b></h4>";
         }
         ?>
         <br><br>

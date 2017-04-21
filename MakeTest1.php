@@ -1,6 +1,9 @@
 
-
-        <?php include "connection.php" ?>
+        <?php include "connection.php"; ?>
+        <?php session_start();
+        if ( 1 != true ){
+        header("Location: index.php");
+        } ?>
         <?php include "menu.php" ?>
         <?php include "control.php" ?>
         <div class="container">

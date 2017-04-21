@@ -1,7 +1,7 @@
 
         <?php include "connection.php"; ?>
         <?php session_start();
-        if ( $_SESSION['logged_in'] != true ){
+        if ( $_SESSION["teacher"] != true ){
         header("Location: index.php");
         } ?>
 
