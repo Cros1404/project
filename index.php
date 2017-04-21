@@ -10,5 +10,6 @@
  if ( "<?php echo $_SESSION["logged_in"]; ?>" != "1" ){
  document.getElementById("content").innerHTML += " Log in to access the courses."
  }
+ 
 </script>
 <?php include "footer.php"; ?>

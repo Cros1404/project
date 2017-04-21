@@ -26,7 +26,7 @@
         PRIMARY KEY (ID),
         FOREIGN KEY (courseName) REFERENCES course(courseName)
             ON DELETE CASCADE
-            ON UPDATE CASCADE 
+            ON UPDATE CASCADE
     ) Engine=InnoDB;
 
     INSERT INTO lesson(courseName, lessonName, videoURL) VALUES('Math', 'Lesson 1', 'https://www.youtube.com/watch?v=7fnnZm_pQv8');
@@ -69,7 +69,7 @@
         PRIMARY KEY (ID),
         FOREIGN KEY (courseName) REFERENCES course(courseName)
             ON DELETE CASCADE
-            ON UPDATE CASCADE 
+            ON UPDATE CASCADE
     ) Engine=InnoDB;
 
     INSERT INTO extraMaterial(courseName, URL, materialName) VALUES( 'Math', 'https://en.wikipedia.org/wiki/Regular_expression', 'Regular Expression on wikipedia');
@@ -83,7 +83,23 @@
         PRIMARY KEY (ID),
         FOREIGN KEY (courseName) REFERENCES course(courseName)
             ON DELETE CASCADE
-            ON UPDATE CASCADE 
+            ON UPDATE CASCADE
     ) Engine=InnoDB;
 
     INSERT INTO livestream(courseName, URL) VALUES( 'Math', 'UCzQUP1qoWDoEbmsQxvdjxgQ');
+
+    CREATE TABLE exam(
+        id_question Smallint Primary key auto_increment,
+        question longtext,
+        A longtext,
+        B longtext,
+        C longtext,
+        D longtext,
+        right_answer longtext,
+        ID int,
+        FOREIGN KEY (ID) REFERENCES lesson(ID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE)
+         Engine=InnoDB;
+      INSERT INTO exam (question,A,B,C,D,right_answer,ID) VALUES('4+1','3','4','5','6','C',1);
+      INSERT INTO exam (question,A,B,C,D,right_answer,ID) VALUES('how many edges does a square have?','3','4','5','6','B',2);

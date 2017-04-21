@@ -1,4 +1,4 @@
-<?php 
+<?php
 // find video link
 $stmt = $db -> prepare("SELECT ID, videoURL, lessonName FROM lesson WHERE ID=:id");
 $stmt -> bindParam(':id', $_GET['id']);
@@ -54,8 +54,17 @@ foreach ( $stmt as $index => $x ) {
 if ( $empty )
 	echo '<i style="color:grey">No materials available.</i>';
 
-if ($_SESSION['EditMode']) 
+if ($_SESSION['EditMode'])
 	echo '<br><button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" onclick="btnPress( \'Add New\', \'Material\')"><span class="glyphicon glyphicon-plus"></span> Add New Material</button>' ;
+
+$stmt = $db -> prepare("SELECT id_question FROM exam WHERE ID=:id");
+$stmt -> bindParam(':id', $_GET['id']);
+$stmt -> execute();
+$x = $stmt -> fetch();
+if ( $x )
+  echo '<hr><a href="Test'.$_GET['id'].'.php"> Test</a>' ;
+else
+  echo '<hr><i style="color:grey">No test available.</i>';
 
 echo '<script type="text/javascript">
 	document.getElementById("lesson'.$_GET['id'].'").setAttribute("class", "active");
