@@ -17,7 +17,7 @@ if ( $_GET['id'] == "livestream" ){
 } else
 	include "lesson_page.php";?>
 
-<br><br>
+<br>
 <form action="lesson.php?courseName=<?php echo $_GET['courseName'];?>&id=<?php echo $_GET['id'];?>" method="post">
 <?php
 if ($_SESSION['teacher']){
