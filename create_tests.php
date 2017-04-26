@@ -11,7 +11,7 @@ header("Location: index.php");
 </script>
 <h2 style="margin-left: 65px">CREATE TESTS</h2>
 <p style="margin-left: 65px">Choose a couser and then choose a lesson to create a test</p>
-<div class="container list_group" style="width:500px;margin-left: 50px">
+<div class="container list_group" style="width:500px;margin-left: 50px" id="list">
 
 <?php
 
@@ -19,11 +19,11 @@ $myquery = "SELECT courseName FROM course";
 $data = $db -> query($myquery);
 foreach ($data as $x)
 {
-    echo '<a class="list-group-item" data-toggle="collapse" data-target="#demo"><h4>'.$x['courseName'].'</h4></a>';
+    echo '<a class="list-group-item" data-toggle="collapse" data-parent="#list" href="#'.$x['courseName'].'"  ><h4>'.$x['courseName'].'</h4></a>';
     $course_name= $x['courseName'];
     $getLesson = "SELECT lessonName,ID,courseName, testPublished FROM lesson where courseName = '$course_name' ";
     $LessonInfo = $db -> query($getLesson);
-    echo '<div id="demo" class="collapse">';
+    echo '<div id="'.$x['courseName'].'" class="collapse">';
     foreach ($LessonInfo as $courseInfo)
     {
         $name_lesson = $courseInfo['lessonName'];
@@ -38,7 +38,7 @@ foreach ($data as $x)
         $test="
         <?php include \"connection.php\"; ?>
         <?php session_start();
-        if ( $_SESSION[teacher] != true ){
+        if ( \$_SESSION['teacher'] != true ){
         header(\"Location: index.php\");
         } ?>
         <?php include \"menu.php\" ?>
@@ -65,30 +65,34 @@ foreach ($data as $x)
       <button type=\"submit\" class=\"btn btn-default\" name=\"btnTest\">Create</button>
     </div>
   </form>
-  <button type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">Look Through The Test</button>
+  <button type=\"button\" class=\"btn btn-success btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">Look Through The Test</button>
   <br><br><br><br>
   <!-- Modal -->
   <div id=\"myModal\" class=\"modal fade\" role=\"dialog\" >
     <div class=\"modal-dialog\" style=\"width:1000px\">
       <!-- Modal content-->
       <div class=\"modal-content\" style=\"width:1000px\">
-        <?php include \"Test$ID.php\" ?>
+        <?php 
+          \$inModal = true ;
+          include \"Test$ID.php\" ; 
+        ?>
         <div class=\"modal-body\">
           <p>The Test will be published when publish button is pressed.</p>
         </div>
         <div class=\"modal-footer\">
 
         <form action=\"buttons.php?id=$ID\" method=\"post\">
-        <a href=\"EditTest$ID.php\"><button type=\"button\"  class=\"btn btn-info btn-primary btn-lg\">Edit The Test</button></a>
+        <a href=\"EditTest$ID.php\"><button type=\"button\"  class=\"btn btn-warning btn-primary btn-lg\">Edit The Test</button></a>
         <?php
         \$stmt = \$db->prepare(\"SELECT testPublished FROM lesson where ID = $ID\");
         \$stmt -> execute();
         \$x = \$stmt -> fetch();
         if ( \$x['testPublished'] != 1 )
-                echo '<button type=\"submit\" class=\"btn btn-info btn-primary btn-lg\" name=\"btnPublish\">Publish</button>';
+                echo '<button type=\"submit\" class=\"btn btn-primary btn-lg\" name=\"btnPublish\">Publish</button>';
         else
-                echo '<button type=\"submit\" class=\"btn btn-info btn-primary btn-lg\" name=\"btnUnpublish\">Unpublish</button>';
+                echo '<button type=\"submit\" class=\"btn btn-danger btn-primary btn-lg\" name=\"btnUnpublish\">Unpublish</button>';
         ?>
+          <button type='button' class='btn btn-default btn-lg' data-dismiss='modal' style='float:left'>Close</button>
           </form>
         </div>
       </div>
@@ -133,7 +137,10 @@ foreach ($data as $x)
         if ( $_SESSION[\'logged_in\'] != true ){
         header("Location: index.php");
         } ?>
-        <?php include "menu.php" ?>
+        <?php 
+        if ( $inModal == null )
+          include "menu.php"; 
+        ?>
         <div class="container">
         <h3>TEST: '.$name_lesson.' </h3>
         <form class="container" action="Test'.$ID.'.php" method="post" >
@@ -160,7 +167,7 @@ echo "</div></div></div>";
 $i++;
         }
 ?>
-        <input type=\'submit\' class="btn" name=\'btnSmTest'.$ID.'\' value=\'Submit\' style="margin-left: 500px;" >
+        <input type=\'submit\' class="btn btn-default" name=\'btnSmTest'.$ID.'\' value=\'Submit\' style="margin-left: 500px;" >
         </form>
         </div>
         <?php
@@ -174,7 +181,7 @@ $i++;
               echo
               "
               <script>
-              document.getElementById(\"$i\").innerHTML=\"<b >Your choosen is: ".$_POST[$i]." <br>Congratulations!!!</b>\";
+              document.getElementById(\"$i\").innerHTML=\"<b >Your answer: ".$_POST[$i]." <br>Congratulations!</b>\";
               </script>
               ";
               $right_answer_numbers +=1;
@@ -182,7 +189,7 @@ $i++;
             }
             else
             {
-                $answer = "Your answer: $_POST[$i] <br> Try Again!!!";
+                $answer = "Your answer: $_POST[$i] <br> Try Again!";
                 if ( $_POST[$i] == null )
                   $answer = "You did not choose an answer.";
                 echo "<script>document.getElementById(\"$i\").innerHTML=\"<b>".$answer."</b>\";</script>";
@@ -231,7 +238,7 @@ $i++;
 
         </table>
 
-        <input  type="submit" class="btn" name="deleteSelected" value="Delete">
+        <input  type="submit" class="btn btn-default" name="deleteSelected" value="Delete">
 
 
         </form>

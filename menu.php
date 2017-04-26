@@ -26,9 +26,6 @@
     </div>
     <ul id="menu" class="nav navbar-nav">
       <li id="home"><a href="/project/index.php">Home</a></li>
-
-     <!--  <li><a href="#">Page 2</a></li>
-      <li><a href="#">Page 3</a></li> -->
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li id="login"><a href="/project/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

@@ -1,6 +1,8 @@
 <script type="text/javascript">
 	document.getElementById("livestream").setAttribute("class", "active");
 </script>
+<h2>Livestream</h2>
+<hr>
 <?php
 if ( $_SESSION["error"] == 3 ){
 		echo '<p class="alert alert-warning"><strong>Error! </strong>Invalid Youtube URL or channel ID.</p>' ;
@@ -23,7 +25,7 @@ if ( $x ){
 	}
 }
 else {
-	echo '<i style="color:grey">No livestream available.</i>';
+	echo '<br><i style="color:grey">No livestream available.</i>';
 	if ($_SESSION['EditMode']) {
 			echo '<br><button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" onclick="btnPress( \'Add New\', \'Livestream\' )"><span class="glyphicon glyphicon-plus"></span> Add The Livestream</button> ';
 	}

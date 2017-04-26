@@ -29,7 +29,7 @@
 
         </table>
 
-        <input  type="submit" class="btn" name="deleteSelected" value="Delete">
+        <input  type="submit" class="btn btn-default" name="deleteSelected" value="Delete">
 
 
         </form>

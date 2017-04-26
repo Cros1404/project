@@ -7,9 +7,9 @@
         <?php include "menu.php" ?>
         <?php include "control.php" ?>
         <div class="container">
-        <form action="moveTest2.php" method="post">
-        <input type="hidden" name="ID"  value="2" id="ID">
-        <h2>Create Test For Lesson: Lesson 2</h2>
+        <form action="moveTest4.php" method="post">
+        <input type="hidden" name="ID"  value="4" id="ID">
+        <h2>Create Test For Lesson: Lesson 1 </h2>
     <div class="form-group">
       <label for="qust">Question:</label>
       <input type="text" name="qust" class="form-control" id="qust" >
@@ -37,17 +37,17 @@
       <div class="modal-content" style="width:1000px">
         <?php 
           $inModal = true ;
-          include "Test2.php" ; 
+          include "Test4.php" ; 
         ?>
         <div class="modal-body">
           <p>The Test will be published when publish button is pressed.</p>
         </div>
         <div class="modal-footer">
 
-        <form action="buttons.php?id=2" method="post">
-        <a href="EditTest2.php"><button type="button"  class="btn btn-warning btn-primary btn-lg">Edit The Test</button></a>
+        <form action="buttons.php?id=4" method="post">
+        <a href="EditTest4.php"><button type="button"  class="btn btn-warning btn-primary btn-lg">Edit The Test</button></a>
         <?php
-        $stmt = $db->prepare("SELECT testPublished FROM lesson where ID = 2");
+        $stmt = $db->prepare("SELECT testPublished FROM lesson where ID = 4");
         $stmt -> execute();
         $x = $stmt -> fetch();
         if ( $x['testPublished'] != 1 )

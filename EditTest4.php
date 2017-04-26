@@ -8,14 +8,14 @@
         <?php include "menu.php" ?>
         <div class="container">
         <h2>DELETE QUESTIONS</h2>
-        <form class="" action="DeleteTestQuestion1.php" method="post">
+        <form class="" action="DeleteTestQuestion4.php" method="post">
         <table class="table table-striped">
           <tr class="active">
             <th>Question</th><th>A</th><th>B</th><th>C</th><th>D</th><th>Right Answer</th><th>Delete</th>
           </tr>
           <?php
           include "connection.php";
-          $myquery="SELECT question,A,B,C,D,right_answer,id_question,ID FROM exam WHERE ID=1";
+          $myquery="SELECT question,A,B,C,D,right_answer,id_question,ID FROM exam WHERE ID=4";
           $question_data = $db->query($myquery);
 
           foreach ($question_data as $row) {

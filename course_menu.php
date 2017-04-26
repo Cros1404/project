@@ -38,7 +38,7 @@ include "menu.php"; ?>
 
   ?>  
     <li><hr></li>
-    <li id="livestream"><a href="lesson.php?courseName=<?php echo $_GET['courseName'];?>&id=livestream">Live Stream</a></li>
+    <li id="livestream"><a href="lesson.php?courseName=<?php echo $_GET['courseName'];?>&id=livestream">Livestream</a></li>
     <li id="materials"><a href="lesson.php?courseName=<?php echo $_GET['courseName'];?>&id=materials">Study Materials</a></li>
 <?php 
 if ( $_SESSION['EditMode'] ){

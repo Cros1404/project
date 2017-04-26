@@ -1,6 +1,8 @@
 <script type="text/javascript">
 	document.getElementById("materials").setAttribute("class", "active");
 </script>
+<h2>Study Materials</h2>
+<hr>
 <?php
 $stmt = $db -> prepare("SELECT ID, URL, materialName FROM extraMaterial WHERE courseName=:courseName");
 $stmt -> bindParam(':courseName', $_GET['courseName']);
@@ -18,7 +20,7 @@ foreach ( $stmt as $index => $x ) {
 }
 
 if ( $empty )
-	echo '<i style="color:grey">No extra materials available.</i>';
+	echo '<br><i style="color:grey">No extra materials available.</i>';
 
 if ($_SESSION['EditMode']) 
 	echo '<br><button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" onclick="btnPress( \'Add New\', \'Extra Material\')"><span class="glyphicon glyphicon-plus"></span> Add New Material</button>' ;

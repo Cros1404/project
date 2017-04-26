@@ -1,7 +1,7 @@
 
         <?php include "connection.php"; ?>
         <?php session_start();
-        if ( 1 != true ){
+        if ( $_SESSION['teacher'] != true ){
         header("Location: index.php");
         } ?>
         <?php include "menu.php" ?>
@@ -28,30 +28,34 @@
       <button type="submit" class="btn btn-default" name="btnTest">Create</button>
     </div>
   </form>
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Look Through The Test</button>
+  <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">Look Through The Test</button>
   <br><br><br><br>
   <!-- Modal -->
   <div id="myModal" class="modal fade" role="dialog" >
     <div class="modal-dialog" style="width:1000px">
       <!-- Modal content-->
       <div class="modal-content" style="width:1000px">
-        <?php include "Test1.php" ?>
+        <?php 
+          $inModal = true ;
+          include "Test1.php" ; 
+        ?>
         <div class="modal-body">
           <p>The Test will be published when publish button is pressed.</p>
         </div>
         <div class="modal-footer">
 
         <form action="buttons.php?id=1" method="post">
-        <a href="EditTest1.php"><button type="button"  class="btn btn-info btn-primary btn-lg">Edit The Test</button></a>
+        <a href="EditTest1.php"><button type="button"  class="btn btn-warning btn-primary btn-lg">Edit The Test</button></a>
         <?php
         $stmt = $db->prepare("SELECT testPublished FROM lesson where ID = 1");
         $stmt -> execute();
         $x = $stmt -> fetch();
         if ( $x['testPublished'] != 1 )
-                echo '<button type="submit" class="btn btn-info btn-primary btn-lg" name="btnPublish">Publish</button>';
+                echo '<button type="submit" class="btn btn-primary btn-lg" name="btnPublish">Publish</button>';
         else
-                echo '<button type="submit" class="btn btn-info btn-primary btn-lg" name="btnUnpublish">Unpublish</button>';
+                echo '<button type="submit" class="btn btn-danger btn-primary btn-lg" name="btnUnpublish">Unpublish</button>';
         ?>
+          <button type='button' class='btn btn-default btn-lg' data-dismiss='modal' style='float:left'>Close</button>
           </form>
         </div>
       </div>

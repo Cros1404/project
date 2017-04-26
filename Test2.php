@@ -4,7 +4,10 @@
         if ( $_SESSION['logged_in'] != true ){
         header("Location: index.php");
         } ?>
-        <?php include "menu.php" ?>
+        <?php 
+        if ( $inModal == null )
+          include "menu.php"; 
+        ?>
         <div class="container">
         <h3>TEST: Lesson 2 </h3>
         <form class="container" action="Test2.php" method="post" >
@@ -31,7 +34,7 @@ echo "</div></div></div>";
 $i++;
         }
 ?>
-        <input type='submit' class="btn" name='btnSmTest2' value='Submit' style="margin-left: 500px;" >
+        <input type='submit' class="btn btn-default" name='btnSmTest2' value='Submit' style="margin-left: 500px;" >
         </form>
         </div>
         <?php
@@ -45,7 +48,7 @@ $i++;
               echo
               "
               <script>
-              document.getElementById(\"$i\").innerHTML=\"<b >Your choosen is: ".$_POST[$i]." <br>Congratulations!!!</b>\";
+              document.getElementById(\"$i\").innerHTML=\"<b >Your answer: ".$_POST[$i]." <br>Congratulations!</b>\";
               </script>
               ";
               $right_answer_numbers +=1;
@@ -53,7 +56,7 @@ $i++;
             }
             else
             {
-                $answer = "Your answer: $_POST[$i] <br> Try Again!!!";
+                $answer = "Your answer: $_POST[$i] <br> Try Again!";
                 if ( $_POST[$i] == null )
                   $answer = "You did not choose an answer.";
                 echo "<script>document.getElementById(\"$i\").innerHTML=\"<b>".$answer."</b>\";</script>";
