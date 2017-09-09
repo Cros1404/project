@@ -15,7 +15,7 @@ include "menu.php"; ?>
 <div class="container"><div class="row"><div class="col-12 col-auto"><div class="well" style="width:auto;float:left">
   <h4 style="line-height: 130%;"><strong><i>
   <?php
-  echo str_replace(" ", "<br>", $_GET['courseName']) ;
+  echo str_replace(" ", "<br>", htmlspecialchars($_GET['courseName'])) ;
   ?></i></strong></h4>
   <hr>
   <ul class="nav nav-pills nav-stacked" role="tablist">
@@ -26,7 +26,7 @@ include "menu.php"; ?>
     $empty = true;
     foreach ($stmt as $x){
       $empty = false;
-      echo '<li id="lesson'.$x['ID'].'"><a href="lesson.php?courseName='.$_GET['courseName'].'&id='.$x['ID'].'" id="lessonlink'.$x['ID'].'">'.$x['lessonName'].'</a></li>';
+      echo '<li id="lesson'.$x['ID'].'"><a href="lesson.php?courseName='.htmlspecialchars($_GET['courseName']).'&id='.$x['ID'].'" id="lessonlink'.$x['ID'].'">'.$x['lessonName'].'</a></li>';
     }
     if ($empty)
       echo '<li><i style="color:grey">No lessons available.</i></li>';
@@ -38,12 +38,12 @@ include "menu.php"; ?>
 
   ?>  
     <li><hr></li>
-    <li id="livestream"><a href="lesson.php?courseName=<?php echo $_GET['courseName'];?>&id=livestream">Livestream</a></li>
-    <li id="materials"><a href="lesson.php?courseName=<?php echo $_GET['courseName'];?>&id=materials">Study Materials</a></li>
+    <li id="livestream"><a href="lesson.php?courseName=<?php echo htmlspecialchars($_GET['courseName']);?>&id=livestream">Livestream</a></li>
+    <li id="materials"><a href="lesson.php?courseName=<?php echo htmlspecialchars($_GET['courseName']);?>&id=materials">Study Materials</a></li>
 <?php 
 if ( $_SESSION['EditMode'] ){
-      echo '<li><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" style="width:170px;" onclick="btnPress(\'Edit\', \'Course Name\', \''.$_GET['courseName'].'\')"><span class="glyphicon glyphicon-edit"></span> Edit Course Name</button></li>' ;
-      echo '<li><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" style="width:170px;" onclick="btnPress(\'Delete\', \'This Course\', \''.$_GET['courseName'].'\')"><span class="glyphicon glyphicon-remove"></span> Delete This Course</button></li>' ;
+      echo '<li><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" style="width:170px;" onclick="btnPress(\'Edit\', \'Course Name\', \''.htmlspecialchars($_GET['courseName']).'\')"><span class="glyphicon glyphicon-edit"></span> Edit Course Name</button></li>' ;
+      echo '<li><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" style="width:170px;" onclick="btnPress(\'Delete\', \'This Course\', \''.htmlspecialchars($_GET['courseName']).'\')"><span class="glyphicon glyphicon-remove"></span> Delete This Course</button></li>' ;
     }
 ?>
   </ul>

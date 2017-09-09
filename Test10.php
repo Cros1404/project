@@ -9,15 +9,15 @@
           include "menu.php"; 
         ?>
         <div class="container">
-        <h3>TEST: Lesson 1123 </h3>
-        <form class="container" action="Test1.php" method="post" >
+        <h3>TEST: Lesson 1 </h3>
+        <form class="container" action="Test10.php" method="post" >
         <?php include "connection.php";
-        $nRow="SELECT COUNT(*) FROM exam where ID =1";
+        $nRow="SELECT COUNT(*) FROM exam where ID =10";
         $data_Row=$db->query($nRow);
         $number_of_row=$data_Row->fetchColumn();
         echo "This test has <b>".$number_of_row." questions</b>.<br><br>";
         $i=1;
-          $myquery="SELECT * FROM exam WHERE ID=1 ";
+          $myquery="SELECT * FROM exam WHERE ID=10 ";
           $question_data = $db->query($myquery);
           foreach ($question_data as $row){
 $the_answer=$row["right_answer"];
@@ -34,11 +34,11 @@ echo "</div></div></div>";
 $i++;
         }
 ?>
-        <input type='submit' class="btn btn-default" name='btnSmTest1' value='Submit' style="margin-left: 500px;" >
+        <input type='submit' class="btn btn-default" name='btnSmTest10' value='Submit' style="margin-left: 500px;" >
         </form>
         </div>
         <?php
-        if(isset($_POST['btnSmTest1']))
+        if(isset($_POST['btnSmTest10']))
         {
           $right_answer_numbers = 0;
           $right_answer_point = 0;

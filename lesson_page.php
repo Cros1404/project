@@ -59,11 +59,11 @@ if ($_SESSION['EditMode'])
 	echo '<br><button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" onclick="btnPress( \'Add New\', \'Material\')"><span class="glyphicon glyphicon-plus"></span> Add New Material</button>' ;
 
 if ( $testPublished == true )
-  echo '<hr><a href="Test'.$_GET['id'].'.php" class="btn btn-default"> Test</a>' ;
+  echo '<hr><a href="Test'.htmlspecialchars($_GET['id']).'.php" class="btn btn-default"> Test</a>' ;
 else
   echo '<hr><i style="color:grey">No test available.</i>';
 
 echo '<script type="text/javascript">
-	document.getElementById("lesson'.$_GET['id'].'").setAttribute("class", "active");
+	document.getElementById("lesson'.htmlspecialchars($_GET['id']).'").setAttribute("class", "active");
 </script>';
 ?>

@@ -18,7 +18,7 @@ if ( $_GET['id'] == "livestream" ){
 	include "lesson_page.php";?>
 
 <br>
-<form action="lesson.php?courseName=<?php echo $_GET['courseName'];?>&id=<?php echo $_GET['id'];?>" method="post">
+<form action="lesson.php?courseName=<?php echo htmlspecialchars($_GET['courseName']);?>&id=<?php echo htmlspecialchars($_GET['id']);?>" method="post">
 <?php
 if ($_SESSION['teacher']){
 	echo '<hr>';
@@ -43,7 +43,7 @@ if ($_SESSION['teacher']){
         <h4 class="modal-title" id="title">Edit Exercise URL</h4>
       </div>
       <div class="modal-body">
-	    <form action="buttons.php?courseName=<?php echo $_GET['courseName'];?>&id=<?php echo $_GET['id'];?>" method="post">
+	    <form action="buttons.php?courseName=<?php echo htmlspecialchars($_GET['courseName']);?>&id=<?php echo htmlspecialchars($_GET['id']);?>" method="post">
 		      <div id="form">
 			  </div>
 			  <input type="hidden" class="form-control" name="objectID" id="objectIDtoSend">
