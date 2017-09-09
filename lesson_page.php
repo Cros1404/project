@@ -4,7 +4,7 @@ $stmt = $db -> prepare("SELECT ID, videoURL, lessonName, testPublished FROM less
 $stmt -> bindParam(':id', $_GET['id']);
 $stmt -> execute();
 $x = $stmt -> fetch();
-$testPublished = $x['testPublished'];
+$testPublished = false; // tests are removed in this version
 parse_str( parse_url( $x['videoURL'], PHP_URL_QUERY ), $my_array_of_vars ); // Get video ID from URL
 echo '<iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/'.$my_array_of_vars['v'].'" frameborder="0" allowfullscreen></iframe>';
 if ($_SESSION['EditMode']) {

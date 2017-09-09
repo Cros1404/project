@@ -3,7 +3,6 @@
 	{
 	 $dsn = "mysql:host=localhost;dbname=distancelearning";
 	 $db = new PDO ($dsn, "webuser", "webpass");
-	 // print ("Connected\n");
 	}
 	catch (PDOException $e)
 	{

@@ -37,10 +37,4 @@
     document.getElementById("login").innerHTML = '<a href="/project/logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a>';
     document.getElementById("menu").innerHTML += '<li id="courses"><a href="/project/courses.php">Courses</a></li>';
   }
-  <?php /*if($_SESSION['teacher']==true)
-  {
-  echo "document.getElementById(\"menu\").innerHTML += '<li id=\"createtest\"><a href=\"/project/create_tests.php\">Create Tests</a></li>';";
-
-  } */
-   ?>
 </script>
