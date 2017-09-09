@@ -36,6 +36,18 @@ if ( isset($_POST['btnLogin'] ) ) {
 	  </div>
 	  <button type="submit" class="btn btn-default" name="btnLogin">Login</button>
 	</form>
+	<br>
+	To login as privileged user -  
+	<br>
+	Username: teacher
+	<br>
+	Password: test
+	<br><br>
+	Unpriveleged user - 
+	<br>
+	Username: user
+	<br>
+	Password: test
 <?php 
 if(isset($_POST['btnLogin'])) {
 	if ( $_SESSION["logged_in"] != true ){
